@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "921338291589",
+    "project_id": "learning-withvandad-project",
+    "storage_bucket": "learning-withvandad-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921338291589:android:35fb0fd2f4ac8b8a8890ec",
+        "android_client_info": {
+          "package_name": "com.example.learning_dart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "921338291589-pnke9td9nlsorg9b5moufqc0d3e4eijj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-sM98APneVz3pWn57SxS0h_ZbYq6XthA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "921338291589-pnke9td9nlsorg9b5moufqc0d3e4eijj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
