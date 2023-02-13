@@ -3,7 +3,7 @@ import 'package:learning_dart/constants/routes.dart';
 import 'package:learning_dart/services/auth/auth_service.dart';
 import 'package:learning_dart/services/crud/notes_service.dart';
 
-import '../enums/menu_action.dart';
+import '../../enums/menu_action.dart';
 
 class NotesView extends StatefulWidget {
   const NotesView({Key? key}) : super(key: key);
@@ -32,8 +32,14 @@ class _NotesViewState extends State<NotesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Main UI'),
+        title: const Text('Your Notes'),
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(newNoteRoute);
+            },
+            icon: const Icon(Icons.add),
+          ),
           PopupMenuButton<MenuAction>(
             onSelected: (value) async {
               switch (value) {
@@ -48,7 +54,7 @@ class _NotesViewState extends State<NotesView> {
             },
             itemBuilder: (context) {
               return const [
-                const PopupMenuItem<MenuAction>(
+                PopupMenuItem<MenuAction>(
                   value: MenuAction.logout,
                   child: Text('Log out'),
                 ),
@@ -63,15 +69,15 @@ class _NotesViewState extends State<NotesView> {
           switch (snapshot.connectionState) {
             case ConnectionState.done:
               return StreamBuilder(
-                stream: _notesService.allNotes,
-                builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.waiting:
-                      return const Text('Waiting for all notes...');
-                    default:
-                      return const CircularProgressIndicator();
-                  }
-                });
+                  stream: _notesService.allNotes,
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return const Text('Waiting for all notes...');
+                      default:
+                        return const CircularProgressIndicator();
+                    }
+                  });
 
             default:
               return const CircularProgressIndicator();
