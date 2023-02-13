@@ -13,37 +13,41 @@ class NotesService {
   List<DatabaseNote> _notes = [];
 
   static final NotesService _shared = NotesService._sharedInstance();
-  NotesService._sharedInstance();
+  NotesService._sharedInstance() {
+    _notesStreamController = StreamController<List<DatabaseNote>>.broadcast(
+      onListen: () {
+        _notesStreamController.sink.add(_notes);
+      },
+    );
+  }
   factory NotesService() => _shared;
 
-  final _notesStreamController =
-   StreamController<List<DatabaseNote>>.broadcast();
+  late final StreamController<List<DatabaseNote>> _notesStreamController;
 
-   Stream<List<DatabaseNote>> get allNotes => _notesStreamController.stream;
+  Stream<List<DatabaseNote>> get allNotes => _notesStreamController.stream;
 
-   Future<DatabaseUser> getOrCreateUser({required String email}) async {
-    try{
+  Future<DatabaseUser> getOrCreateUser({required String email}) async {
+    try {
       final user = await getUser(email: email);
       return user;
     } on CouldNotFindUser {
-      final createdUser =  await createUser(email: email);
+      final createdUser = await createUser(email: email);
       return createdUser;
     } catch (e) {
       rethrow;
     }
-   }
+  }
 
-   Future<void> _cacheNotes() async {
+  Future<void> _cacheNotes() async {
     final allNotes = await getAllNotes();
     _notes = allNotes.toList();
     _notesStreamController.add(_notes);
-   }
+  }
 
   Future<DatabaseNote> updateNote({
     required DatabaseNote note,
     required String text,
-  }) 
-  async {
+  }) async {
     await _ensureDblsOpen();
     final db = _getDatabaseOrThrow();
 
@@ -100,8 +104,8 @@ class NotesService {
     await _ensureDblsOpen();
     final db = _getDatabaseOrThrow();
     final numberofDeletions = await db.delete(noteTable);
-     _notes = [];
-     _notesStreamController.add(_notes);
+    _notes = [];
+    _notesStreamController.add(_notes);
     return numberofDeletions;
   }
 
@@ -219,10 +223,10 @@ class NotesService {
     }
   }
 
-  Future<void> _ensureDblsOpen() async{
-    try{
+  Future<void> _ensureDblsOpen() async {
+    try {
       await open();
-    } on DatabaseAlreadyOpenException{
+    } on DatabaseAlreadyOpenException {
       // empty
     }
   }
