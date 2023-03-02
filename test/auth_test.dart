@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:learning_dart/services/auth/auth_exceptions.dart';
 import 'package:learning_dart/services/auth/auth_provider.dart';
 import 'package:learning_dart/services/auth/auth_user.dart';
@@ -61,7 +59,7 @@ void main() {
     });
 
     test('A logged in user should be able to send email verification', () {
-      provider.sendEmailVerifiction();
+      provider.sendEmailVerification();
       final user = provider.currentUser;
       expect(user, isNotNull);
       expect(user!.isEmailVerified, true);
@@ -135,7 +133,7 @@ class MockAuthProvider implements AuthProvider {
   }
 
   @override
-  Future<void> sendEmailVerifiction() async {
+  Future<void> sendEmailVerification() async {
     if (!isInitialized) throw NotInitializedException();
     final user = _user;
     if (user == null) throw UserNotFoundAuthException();
