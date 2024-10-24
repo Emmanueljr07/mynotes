@@ -11,7 +11,7 @@ import '../../enums/menu_action.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show ReadContext;
 
 class NotesView extends StatefulWidget {
-  const NotesView({Key? key}) : super(key: key);
+  const NotesView({super.key});
 
   @override
   State<NotesView> createState() => _NotesViewState();
@@ -31,6 +31,7 @@ class _NotesViewState extends State<NotesView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.amber,
         title: const Text('Your Notes'),
         actions: [
           IconButton(
@@ -45,6 +46,7 @@ class _NotesViewState extends State<NotesView> {
                 case MenuAction.logout:
                   final shouldLogout = await showLogOutDialog(context);
                   if (shouldLogout) {
+                    // ignore: use_build_context_synchronously
                     context.read<AuthBloc>().add(
                           const AuthEventLogOut(),
                         );

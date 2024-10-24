@@ -3,12 +3,12 @@ import 'package:learning_dart/services/auth/auth_service.dart';
 import 'package:learning_dart/utilities/dialogs/cannot_share_empty_note_dialog.dart';
 import 'package:learning_dart/utilities/generics/get_arguments.dart';
 import 'package:learning_dart/services/cloud/cloud_note.dart';
-import 'package:learning_dart/services/cloud/cloud_storage_exceptions.dart';
+// import 'package:learning_dart/services/cloud/cloud_storage_exceptions.dart';
 import 'package:learning_dart/services/cloud/firebase_cloud_storage.dart';
 import 'package:share_plus/share_plus.dart';
 
 class CreateUpdateNoteView extends StatefulWidget {
-  const CreateUpdateNoteView({Key? key}) : super(key: key);
+  const CreateUpdateNoteView({super.key});
 
   @override
   State<CreateUpdateNoteView> createState() => _CreateUpdateNoteViewState();

@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning_dart/utilities/dialogs/loading_dialog.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+  const LoginView({super.key});
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -98,7 +98,7 @@ class _LoginViewState extends State<LoginView> {
             ),
             TextButton(
               onPressed: () {
-                context.read()<AuthBloc>().add(
+                context.read<AuthBloc>().add(
                       const AuthEventShouldRegister(),
                     );
               },
